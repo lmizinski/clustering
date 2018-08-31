@@ -1,0 +1,12 @@
+1. DBSCAN z mniejszą niż 0.1 wartością parametru - wykrywanie małych grup elementów (ilość elementów w grupie < 5).
+2. Odpalanie LOF tylko  na wybranych grupach, zmienić kolor na zielony, bez ramki
+3. Liniowa regresja na poszczególnym tankowaniu
+4. KNN - do wyszukiwania outlinerów
+
+Ad2. 
+transparent =(0,0,0,0.1)
+a = plt.scatter(X[:, 0], X[:, 1], c='cobaltgreen', edgecolor=transparent, s=10)
+b = plt.scatter(outliers[:, 0], outliers[:, 1], c='red', edgecolor=transparent, s=10)
+
+Ad4.
+https://github.com/yzhao062/Pyod
