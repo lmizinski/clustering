@@ -1,7 +1,9 @@
 1. DBSCAN z mniejszą niż 0.1 wartością parametru - wykrywanie małych grup elementów (ilość elementów w grupie < 5).
 2. Odpalanie LOF tylko  na wybranych grupach, zmienić kolor na zielony, bez ramki
 3. Liniowa regresja na poszczególnym tankowaniu
-4. KNN - do wyszukiwania outlinerów
+4. Sprawdzić PyOD - Python Outlier Detection
+   Konkretnie KNN - do wyszukiwania outlinerów, pozostałe też mogą być ciekawe
+   https://github.com/yzhao062/Pyod
 
 Ad2. 
 transparent =(0,0,0,0.1)
