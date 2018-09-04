@@ -1,5 +1,6 @@
 1. Odpalanie LOF tylko  na wybranych grupach, zmienić kolor na zielony, bez ramki
 2. Liniowa regresja na poszczególnym tankowaniu
+3. PyOD - podmiana kolorów
 
 PyOD - Python Outlier Detection
 https://github.com/yzhao062/Pyod
