@@ -4,7 +4,8 @@ from __future__ import print_function
 import os
 import sys
 import csv
-from time import time
+import time
+#from time import time
 
 import numpy as np
 from scipy import stats
@@ -105,32 +106,13 @@ def get_csv_data(data_limit=None):
     return np.asarray(result);
 
 X = get_csv_data(10)
-
-#print(X)
-#sys.exit()
-
-
-#clf = LocalOutlierFactor(n_neighbors=20)
-#y_pred = clf.fit_predict(X)
-#outliers = [];
-#for key, val in enumerate(X):
-#    if y_pred[key] and y_pred[key] == -1:
-#        outliers.append(val);
-
-#X = np.array(X)
-#outliers = np.array(outliers)
-
-#a = plt.scatter(X[:, 0], X[:, 1], c='g', edgecolor='', s=5)
-#b = plt.scatter(outliers[:, 0], outliers[:, 1], c='red', edgecolor='', s=5)
-
 X = np.array(X)
+X_len = len(X)
 
-# Fit the models with the generated data and 
-# compare model performances
-
-# Fit the model
+# Fit the models with the generated data and compare model performances
 plt.figure(figsize=(15, 12))
 for i, (clf_name, clf) in enumerate(classifiers.items()):
+    t0 = time.time()
     print(i + 1, 'fitting', clf_name)
     # fit the data and tag outliers
     clf.fit(X)
@@ -140,24 +122,33 @@ for i, (clf_name, clf) in enumerate(classifiers.items()):
     
     outliers = [];
     for key, val in enumerate(X):
-        if (y_pred[key] == -1 or y_pred[key] == 0):
+        if (y_pred[key] == -1 or y_pred[key] == 1):
             outliers.append(val);
 
     outliers = np.array(outliers)
+    outliers_len = len(outliers)
+    t1 = time.time()
     #print(X,y_pred,outliers)
     #sys.exit()
     subplot = plt.subplot(3, 4, i + 1)
 
-    b = subplot.scatter(X[:, 0], X[:, 1], c='g', s=10, edgecolor='')
-    c = subplot.scatter(outliers[:, 0], outliers[:, 1], c='r', s=10, edgecolor='')
-
+    
+    b = subplot.scatter(X[:, 0], X[:, 1], c='g', s=4, edgecolor='')
+    if outliers_len>0:
+        c = subplot.scatter(outliers[:, 0], outliers[:, 1], c='r', s=4, edgecolor='')
+    else:
+        c = []
+        
     subplot.axis('tight')
     subplot.legend(
         [b, c],
-        ['true inliers', 'true outliers'],
-        prop=matplotlib.font_manager.FontProperties(size=10),
+        ["all data (%d)" % X_len, 'outliers (%d)' % outliers_len],
+        prop=matplotlib.font_manager.FontProperties(size=8),
         loc='lower right')
     subplot.set_xlabel("%d. %s" % (i + 1, clf_name))
+    subplot.text(.15, .01, ('%.2fs' % (t1 - t0)).lstrip('0'),
+                 transform=plt.gca().transAxes, size=10,
+                 horizontalalignment='right')
     #subplot.set_xlim((-7, 7))
     #subplot.set_ylim((-7, 7))
 plt.subplots_adjust(0.04, 0.1, 0.96, 0.94, 0.1, 0.26)
