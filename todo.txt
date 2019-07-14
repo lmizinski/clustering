@@ -1,4 +1,6 @@
-1. Liniowa regresja na poszczególnym tankowaniu
+﻿1. Liniowa regresja na poszczególnym tankowaniu
+
+
 
 PyOD - Python Outlier Detection
 https://github.com/yzhao062/Pyod
