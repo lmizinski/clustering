@@ -1,2 +1,2 @@
 <?php
-echo timestamp()." Hello world";
+echo "Hello world ".date("Y-m-d h:i:s", time());
